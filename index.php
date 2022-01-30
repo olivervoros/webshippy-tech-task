@@ -1,10 +1,14 @@
 <?php
 
-require 'vendor/autoload.php';
+require_once 'app/bootstrap.php';
 
-use App\GetFulfillableOrders;
+use WebshippyTechTask\ValidateCSVFile;
+use WebshippyTechTask\ReadCSVFile;
+use WebshippyTechTask\FormatCSVResult;
+use WebshippyTechTask\SortCSVResult;
+use WebshippyTechTask\GetFulfillableOrders;
 
-$validator = new ValidateCSVfile('{"1":2,"2":3,"3":1}');
+$validator = new ValidateCSVFile();
 $reader = new ReadCSVFile();
 $formatter = new FormatCSVResult();
 $resultSorter = new SortCSVResult();

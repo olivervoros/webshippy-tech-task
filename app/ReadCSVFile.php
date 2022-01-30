@@ -1,5 +1,9 @@
 <?php
 
+namespace WebshippyTechTask;
+
+use WebshippyTechTask\Interfaces\ReadCSVFileInterface;
+
 class ReadCSVFile implements ReadCSVFileInterface
 {
 

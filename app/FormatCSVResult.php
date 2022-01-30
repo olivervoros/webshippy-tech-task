@@ -1,17 +1,21 @@
 <?php
 
+namespace WebshippyTechTask;
+
+use WebshippyTechTask\Interfaces\FormatCSVResultInterface;
+
 class FormatCSVResult implements FormatCSVResultInterface
 {
 
-    public function format(array $results): string
+    public function format(array $results, string $stock): string
     {
-        // TODO: work out $stock...
+        $stock = json_decode($stock);
         foreach ($results['ordersHeader'] as $h) {
             echo str_pad($h, 20);
         }
         $displayResults = PHP_EOL;
         foreach ($results['ordersHeader'] as $h) {
-            $result .= str_repeat('=', 20);
+            $displayResults .= str_repeat('=', 20);
         }
         $displayResults .= PHP_EOL;
         foreach ($results['orders'] as $item) {

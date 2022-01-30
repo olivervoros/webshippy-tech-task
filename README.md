@@ -14,7 +14,7 @@ Please refactor the included service.
 Send us the url of the GitHub repository.
 
 ## Service
-"Get fulfillable orders" service returns the fulfillable orders by the input stock
+"Get fulfillable orders" service returns the fulfillable orders by the stock stock
 parameter sorted by priority and created date. An order is fulfillable if product
 stock is greater than or equal to ordered quantity. Orders are stored in csv,
 attached in `order.csv`

@@ -1,10 +1,11 @@
 <?php
 
-namespace App;
-use ValidateCSVFileInterface;
-use SortCSVResultInterface;
-use FormatCSVResultInterface;
-use ReadCSVFileInterface;
+namespace WebshippyTechTask;
+
+use WebshippyTechTask\Interfaces\ValidateCSVFileInterface;
+use WebshippyTechTask\Interfaces\SortCSVResultInterface;
+use WebshippyTechTask\Interfaces\FormatCSVResultInterface;
+use WebshippyTechTask\Interfaces\ReadCSVFileInterface;
 
 class GetFulfillableOrders
 {
@@ -20,13 +21,13 @@ class GetFulfillableOrders
         $this->formatter = $formatter;
         $this->resultSorter = $resultSorter;
     }
-    public function getOrders(string $input): string
+    public function getOrders(string $stock): string
     {
         // 1. Validate CSV file
         try {
-            $this->validator->validate($input);
-        } catch(Exception $e) {
-            throw new Exception($e->getMessage());
+            $this->validator->validate($stock);
+        } catch(\Exception $e) {
+           die($e->getMessage().PHP_EOL);
         }
 
         // 2. read CSV file
@@ -36,7 +37,7 @@ class GetFulfillableOrders
         $sortedResults = $this->resultSorter->sort($results);
 
         // 4. format csv results
-        return $this->formatter->format($sortedResults);
+        return $this->formatter->format($sortedResults, $stock);
 
     }
 

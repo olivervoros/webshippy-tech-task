@@ -3,7 +3,7 @@
     "description": "Webshippy Tech Task",
     "autoload": {
         "psr-4": {
-            "Ov\\WebshippyTechTask\\": "app/"
+            "WebshippyTechTask\\": "app/"
         }
     },
     "authors": [

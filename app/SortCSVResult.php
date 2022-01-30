@@ -1,5 +1,9 @@
 <?php
 
+namespace WebshippyTechTask;
+
+use WebshippyTechTask\Interfaces\SortCSVResultInterface;
+
 class SortCSVResult implements SortCSVResultInterface
 {
 
