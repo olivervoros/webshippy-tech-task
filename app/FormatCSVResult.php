@@ -10,14 +10,16 @@ class FormatCSVResult implements FormatCSVResultInterface
     public function format(array $results, string $stock): string
     {
         $stock = json_decode($stock);
+
+        $displayResult = "";
         foreach ($results['ordersHeader'] as $h) {
-            echo str_pad($h, 20);
+            $displayResult .= str_pad($h, 20);
         }
-        $displayResults = PHP_EOL;
+        $displayResult .= "\n";
         foreach ($results['ordersHeader'] as $h) {
-            $displayResults .= str_repeat('=', 20);
+            $displayResult .= str_repeat('=', 20);
         }
-        $displayResults .= PHP_EOL;
+        $displayResult .= "\n";
         foreach ($results['orders'] as $item) {
             if ($stock->{$item['product_id']} >= $item['quantity']) {
                 foreach ($results['ordersHeader'] as $h) {
@@ -31,15 +33,14 @@ class FormatCSVResult implements FormatCSVResultInterface
                                 $text = 'high';
                             }
                         }
-                        $displayResults .= str_pad($text, 20);
+                        $displayResult .= str_pad($text, 20);
                     } else {
-                        $displayResults .= str_pad($item[$h], 20);
+                        $displayResult .= str_pad($item[$h], 20);
                     }
                 }
-                $displayResults .= PHP_EOL;
+                $displayResult .= "\n";
             }
         }
-        return $displayResults;
-
+        return $displayResult;
     }
 }
