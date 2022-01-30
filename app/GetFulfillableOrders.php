@@ -38,7 +38,8 @@ class GetFulfillableOrders
         }
 
         // 3. sort csv results
-        $sortedResults = $this->resultSorter->sort($results);
+        $sortedResults = $this->resultSorter->sort($results['orders']);
+        print_r($sortedResults); die();
 
         // 4. format csv results
         return $this->formatter->format($sortedResults, $stock);
