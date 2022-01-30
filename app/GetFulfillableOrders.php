@@ -1,6 +1,6 @@
 <?php
 
-namespace  App;
+namespace App;
 use ValidateCSVFileInterface;
 use SortCSVResultInterface;
 use FormatCSVResultInterface;
@@ -23,16 +23,20 @@ class GetFulfillableOrders
     public function getOrders(string $input): string
     {
         // 1. Validate CSV file
-        $this->validator->validate($input);
+        try {
+            $this->validator->validate($input);
+        } catch(Exception $e) {
+            throw new Exception($e->getMessage());
+        }
 
         // 2. read CSV file
-        $result = $this->reader->read($path = 'csv/orders.csv');
+        $results = $this->reader->read($path = 'csv/orders.csv');
 
-        // 3. format csv results
-        $formattedResult = $this->formatter->format($result);
+        // 3. sort csv results
+        $sortedResults = $this->resultSorter->sort($results);
 
-        // 4. sort csv results
-        return $this->resultSorter->sort($formattedResult);
+        // 4. format csv results
+        return $this->formatter->format($sortedResults);
 
     }
 
