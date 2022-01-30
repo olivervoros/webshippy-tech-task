@@ -31,7 +31,11 @@ class GetFulfillableOrders
         }
 
         // 2. read CSV file
-        $results = $this->reader->read($path = 'csv/orders.csv');
+        try {
+            $results = $this->reader->read($path = 'csv/orders.csv');
+        } catch(\Exception $e) {
+            die($e->getMessage().PHP_EOL);
+        }
 
         // 3. sort csv results
         $sortedResults = $this->resultSorter->sort($results);

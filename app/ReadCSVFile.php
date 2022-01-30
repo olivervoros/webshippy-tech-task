@@ -13,7 +13,7 @@ class ReadCSVFile implements ReadCSVFileInterface
         $ordersHeader = [];
 
         $row = 1;
-        if (($handle = fopen($filePath, 'r')) !== false) {
+        if (($handle = @fopen($filePath, 'r')) !== false) {
             while (($data = fgetcsv($handle)) !== false) {
                 if ($row == 1) {
                     $ordersHeader = $data;
@@ -27,9 +27,10 @@ class ReadCSVFile implements ReadCSVFileInterface
                 $row++;
             }
             fclose($handle);
+            return ['ordersHeader' => $ordersHeader, 'orders' =>$orders];
+        } else {
+            throw new \Exception( 'Invalid file path!');
         }
-
-        return ['ordersHeader' => $ordersHeader, 'orders' =>$orders];
 
     }
 
