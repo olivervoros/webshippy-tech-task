@@ -1,0 +1,16 @@
+{
+    "name": "ov/webshippy-tech-task",
+    "description": "Webshippy Tech Task",
+    "autoload": {
+        "psr-4": {
+            "Ov\\WebshippyTechTask\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Oliver Voros",
+            "email": "olivervoros@gmail.com"
+        }
+    ],
+    "require": {}
+}
