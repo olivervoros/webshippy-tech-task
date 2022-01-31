@@ -37,12 +37,13 @@ class GetFulfillableOrders
             die($e->getMessage().PHP_EOL);
         }
 
+        print_r($results); die();
+
         // 3. sort csv results
         $sortedResults = $this->resultSorter->sort($results['orders']);
-        print_r($sortedResults); die();
 
         // 4. format csv results
-        return $this->formatter->format($sortedResults, $stock);
+        return $this->formatter->format($sortedResults, $results['ordersHeader'], $stock);
 
     }
 

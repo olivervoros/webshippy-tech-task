@@ -16,7 +16,7 @@ class ReadCSVFileTest extends TestCase
     public function test_valid_file_path_returns_array()
     {
         $fileReader = new ReadCSVFile();
-        $result = $fileReader->read();
+        $result = $fileReader->read("csv/orders.csv");
         $this->assertIsArray($result);
         $this->assertArrayHasKey("orders", $result);
         $this->assertArrayHasKey("ordersHeader", $result);

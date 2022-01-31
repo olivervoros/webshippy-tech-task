@@ -7,23 +7,23 @@ use WebshippyTechTask\Interfaces\FormatCSVResultInterface;
 class FormatCSVResult implements FormatCSVResultInterface
 {
 
-    public function format(array $results, string $stock): string
+    public function format(array $orders, array $headers, string $stock): string
     {
         $stock = json_decode($stock);
 
         $displayResult = "";
-        foreach ($results['ordersHeader'] as $h) {
-            $displayResult .= str_pad($h, 20);
+        foreach ($headers as $header) {
+            $displayResult .= str_pad($header, 20);
         }
         $displayResult .= "\n";
-        foreach ($results['ordersHeader'] as $h) {
+        foreach ($headers as $header) {
             $displayResult .= str_repeat('=', 20);
         }
         $displayResult .= "\n";
-        foreach ($results['orders'] as $item) {
+        foreach ($orders as $item) {
             if ($stock->{$item['product_id']} >= $item['quantity']) {
-                foreach ($results['ordersHeader'] as $h) {
-                    if ($h == 'priority') {
+                foreach ($headers as $header) {
+                    if ($header == 'priority') {
                         if ($item['priority'] == 1) {
                             $text = 'low';
                         } else {
@@ -35,7 +35,7 @@ class FormatCSVResult implements FormatCSVResultInterface
                         }
                         $displayResult .= str_pad($text, 20);
                     } else {
-                        $displayResult .= str_pad($item[$h], 20);
+                        $displayResult .= str_pad($item[$header], 20);
                     }
                 }
                 $displayResult .= "\n";

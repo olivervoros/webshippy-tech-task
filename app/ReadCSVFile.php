@@ -7,7 +7,7 @@ use WebshippyTechTask\Interfaces\ReadCSVFileInterface;
 class ReadCSVFile implements ReadCSVFileInterface
 {
 
-    public function read(string $filePath = "csv/orders.csv"): array
+    public function read(string $filePath): array
     {
         $orders = [];
         $ordersHeader = [];

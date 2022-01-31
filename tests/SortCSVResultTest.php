@@ -6,7 +6,7 @@ use WebshippyTechTask\SortCSVResult;
 
 class SortCSVResultTest extends TestCase
 {
-    public function test_if_array_sort_works()
+    public function test_if_sorts_array_by_priority_and_created_at()
     {
         $arrayBeforeSort = $this->getArrayBeforeSort();
         $arrayAfterSort = $this->getArrayAfterSort();
