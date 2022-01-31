@@ -15,32 +15,37 @@ class FormatCSVResult implements FormatCSVResultInterface
         foreach ($headers as $header) {
             $displayResult .= str_pad($header, 20);
         }
-        $displayResult .= "\n";
+        $displayResult .= PHP_EOL;
         foreach ($headers as $header) {
             $displayResult .= str_repeat('=', 20);
         }
-        $displayResult .= "\n";
-        foreach ($orders as $item) {
-            if ($stock->{$item['product_id']} >= $item['quantity']) {
+        $displayResult .= PHP_EOL;
+        foreach ($orders as $order) {
+            if ($stock->{$order['product_id']} >= $order['quantity']) {
                 foreach ($headers as $header) {
                     if ($header == 'priority') {
-                        if ($item['priority'] == 1) {
-                            $text = 'low';
-                        } else {
-                            if ($item['priority'] == 2) {
-                                $text = 'medium';
-                            } else {
-                                $text = 'high';
-                            }
-                        }
+                        $text = $this->convertPriorityToString($order['priority']);
                         $displayResult .= str_pad($text, 20);
                     } else {
-                        $displayResult .= str_pad($item[$header], 20);
+                        $displayResult .= str_pad($order[$header], 20);
                     }
                 }
-                $displayResult .= "\n";
+                $displayResult .= PHP_EOL;
             }
         }
         return $displayResult;
+    }
+
+    private function convertPriorityToString(int $priority): string {
+        switch ($priority) {
+            case $priority === 1:
+                return 'low';
+            case $priority === 2:
+                return 'medium';
+            case $priority === 3:
+                return 'high';
+            default:
+                return 'unknown';
+        }
     }
 }

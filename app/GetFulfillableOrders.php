@@ -14,7 +14,11 @@ class GetFulfillableOrders
     private FormatCSVResultInterface $formatter;
     private SortCSVResultInterface $resultSorter;
 
-    public function __construct(ValidateCSVFileInterface $validator, ReadCSVFileInterface $reader, FormatCSVResultInterface $formatter, SortCSVResultInterface $resultSorter)
+    public function __construct(
+                ValidateCSVFileInterface $validator,
+                ReadCSVFileInterface $reader,
+                FormatCSVResultInterface $formatter,
+                SortCSVResultInterface $resultSorter)
     {
         $this->validator = $validator;
         $this->reader = $reader;
@@ -32,12 +36,10 @@ class GetFulfillableOrders
 
         // 2. read CSV file
         try {
-            $results = $this->reader->read($path = 'csv/orders.csv');
+            $results = $this->reader->read('csv/orders.csv');
         } catch(\Exception $e) {
             die($e->getMessage().PHP_EOL);
         }
-
-        print_r($results); die();
 
         // 3. sort csv results
         $sortedResults = $this->resultSorter->sort($results['orders']);
